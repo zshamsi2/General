@@ -27,12 +27,12 @@ for mdF in glob.glob('rawMdcrd/*.mdcrd'):
 	inF.write("quit")
 	inF.close()
 	
-	##################################################################################
-	# run generated input files with the simple command:
-	# for i in `ls cppIn_*`; do cpptraj < $i; done
-	# for the next step you need to have the striped topology files:
-	# as an example of ccptraj
-	# parm mol.water.parm7
-  # parmstrip :WAT
-  ###parmbox nobox 
-  #parmwrite out strip.mol.nobox.parm7
+##################################################################################
+# run generated input files with the simple command:
+# for i in `ls cppIn_*`; do cpptraj < $i; done
+# for the next step you need to have the striped topology files:
+# as an example of ccptraj
+# parm mol.water.parm7
+# parmstrip :WAT
+###parmbox nobox 
+#parmwrite out strip.mol.nobox.parm7
