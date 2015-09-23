@@ -36,3 +36,5 @@ for mdF in glob.glob('rawMdcrd/*.mdcrd'):
 # parmstrip :WAT
 ###parmbox nobox 
 #parmwrite out strip.mol.nobox.parm7
+##################################################################################
+# msmb AtomPairsFeaturizer --out pair_features --pair_indices AtomIndices.txt --top ala2.pdb --trjs "*.dcd"
