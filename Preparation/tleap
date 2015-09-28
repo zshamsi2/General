@@ -1,0 +1,52 @@
+round()
+{
+echo $(printf %.$2f $(echo "scale=$2;(((10^$2)*$1)+0.5)/(10^$2)" | bc))
+};
+
+cmplx=Hax3
+mkdir Initial_Amber_Files_${cmplx}
+echo Initial_Amber_Files_${cmplx}
+cd Initial_Amber_Files_${cmplx}
+
+pdbAdrs='/home/zshamsi2/project-cse/Hax3/SetUp'
+cp ../pdbList .
+
+c=0.03 # Desired Concentration
+while read line
+do
+	mkdir $line
+        cd $line
+        cp ${pdbAdrs}/${line}.pdb .
+
+	echo "source leaprc.ff14SB"> tleap_${line}.in
+	echo "source leaprc.gaff">> tleap_${line}.in
+	echo "loadamberparams frcmod.ionsjc_tip3p">> tleap_${line}.in
+	echo "complex=loadpdb ${line}.pdb">> tleap_${line}.in
+	echo "solvatebox complex TIP3PBOX 10">> tleap_${line}.in
+	echo "quit">> tleap_${line}.in
+	
+	tleap -f  tleap_${line}.in
+	w=`grep "Added" leap.log | cut -c 9-13`
+	a=`echo 0.018*$w |bc`
+	n=`echo $a*$c |bc`
+	echo "NUMBER!!!!"
+	echo $n 
+	N=$(round $n 0);
+	echo $N
+	cat > tleap_${line}.in << EOF
+source leaprc.ff14SB 
+source leaprc.gaff
+loadamberparams frcmod.ionsjc_tip3p
+complex=loadpdb ${line}.pdb
+solvatebox complex TIP3PBOX 10
+addions complex Na+
+addions complex Cl-
+addions complex Na+ $N
+addions complex Cl- $N
+saveamberparm complex ${line}.top ${line}.crd
+savepdb complex ${line}_SetUp.pdb
+quit
+EOF
+	tleap -f  tleap_${line}.in
+	cd ..
+done <pdbList
