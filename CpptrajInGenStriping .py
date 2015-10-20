@@ -9,6 +9,7 @@ import glob
 for mdF in glob.glob('rawMdcrd/*.mdcrd'):
 	l = mdF.split('/')[-1]
 	topN = l.split('_md')[0]
+	# topN = l.split('MD')[0]
 	mdN = l.strip('.mdcrd')
 	print topN, mdN
 
