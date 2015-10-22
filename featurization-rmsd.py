@@ -1,5 +1,6 @@
 import numpy as np
 import mdtraj as md
+import glob
 
 ref_2hyy=md.load('2HYY.pdb')
 t = md.load('stripedTrj/MD1-strTrj/2HYY_2_md1-01.mdcrd', top='2HYY.prmtop')
