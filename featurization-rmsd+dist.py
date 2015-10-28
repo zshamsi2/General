@@ -5,6 +5,7 @@ import glob
 # favorite residues to compute distance(s)
 cont=[[149, 267]]
 # reference structure for calculating RMSD
+# numbering the outputs
 ref_2hyy=md.load('2HYY.pdb')
 count=0
 for file in glob.glob('stripedTrj/MD1-strTrj/2HYY*'):
