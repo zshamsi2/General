@@ -1,0 +1,13 @@
+foreach file [glob *] {
+mol new pnas2011b-S-00-all-000.dcd type {dcd} first 0 last -1 step 1 waitfor 1
+mol addfile system.mae type {mae} first 0 last -1 step 1000 waitfor 1 top 
+animate write pdb tes.pdb beg 0 end 0 sel [atomselect top all]
+}
+
+#########################
+for {set x 10} {$x<25} {incr x} {
+mol new pnas2011b-A-$x-all-000.dcd type {dcd} first 0 last 0 step 1 waitfor 1
+mol addfile system-A-$x.mae type {mae} first 0 last 0 step 1 waitfor 1 top 
+animate write pdb system-A-$x.pdb beg 0 end 0 sel [atomselect top all]
+mol delete top
+}
