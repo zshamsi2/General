@@ -11,3 +11,13 @@ mol addfile system-A-$x.mae type {mae} first 0 last 0 step 1 waitfor 1 top
 animate write pdb system-A-$x.pdb beg 0 end 0 sel [atomselect top all]
 mol delete top
 }
+#########################
+for {set x 10} {$x<24} {incr x} {
+mol new Protein-system-A-$x.pdb type {pdb} first 0 last 0 step 1 waitfor 1
+}
+#########################
+for {set x 10} {$x<24} {incr x} {
+mol new system-A-$x.pdb type {pdb} first 0 last 0 step 1 waitfor 1
+animate write pdb system-A-$x.pdb beg 0 end 0 sel [atomselect top "protein and noh"]
+mol delete top
+}
