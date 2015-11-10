@@ -9,6 +9,7 @@ for file in glob.glob('stripedTrj/MD1-strTrj/*.dcd'):
   a = file.split('/')[-1]
   name = a.split('.')[0]
   t = md.load(file, top='2HYY.prmtop')
+#  rmsds = md.rmsd(t, ref, atom_indices= SOMETHING, frame=0)
   rmsds = md.rmsd(t, ref, frame=0)
   rmsds1 = [[j] for j in rmsds]
   rmsds2 = np.array(rmsds1)
