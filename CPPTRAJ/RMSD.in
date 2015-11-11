@@ -1,0 +1,23 @@
+########################################################################################################################
+# RMSD
+########################################################################################################################
+parm BL_withoutWNaH.top 
+trajin LongTrajectories_withoutWNaH/BL_aMD1_withoutWNaH.mdcrd 
+reference LongTrajectories_withoutWNaH/BL_aMD1_withoutWNaH.mdcrd 1
+rms @CA out rmsd_BL.dat
+run
+quit
+########################################################################################################################
+
+for f in `seq 1 5`; 
+do 
+cat >  rmsd.in << EOF
+parm BK_withoutWNaH.top 
+trajin LongTrajectories_withoutWNaH/BK_aMD${f}_withoutWNaH.mdcrd 
+reference LongTrajectories_withoutWNaH/BK_aMD1_withoutWNaH.mdcrd 1
+rms @CA out rmsd_CA_BK_aMD${f}.dat
+run
+quit
+EOF
+cpptraj < rmsd.in; 
+done
