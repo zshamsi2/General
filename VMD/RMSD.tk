@@ -1,0 +1,10 @@
+mol new 3P0G-A.pdb type {pdb} first 0 last 0 step 1 waitfor 1
+set ref [atomselect top "backbone"]
+for {set x 0} {$x<25} {incr x} {
+mol new Protein-system-A-$x.pdb type {pdb} first 0 last 0 step 1 waitfor 1
+set sel [atomselect top "backbone"]
+set a [measure rmsd $sel $ref]
+echo $x
+echo $a
+mol delete top
+}
