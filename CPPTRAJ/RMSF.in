@@ -1,0 +1,18 @@
+########################################################################################################################
+# RMSF
+########################################################################################################################
+parm B_withoutWNaH.top
+trajin  LongTrajectories_withoutWNa/B_aMD1_withoutWNaH.mdcrd
+atomicfluct out backbone_aMD1.apf @C,CA,N
+run
+quit
+########################################################################################################################
+for f in `seq 1 5`; 
+do 
+echo "parm BL_withoutWNaH.top" > cp.in; 
+echo "trajin  LongTrajectories_withoutWNaH/BL_aMD${f}_withoutWNaH.mdcrd">> cp.in; 
+echo "atomicfluct out rmsf_backbone_BL_aMD"${f}".apf @C,CA,N" >> cp.in; 
+echo "run" >> cp.in; 
+echo "quit" >> cp.in : 
+cpptraj < cp.in; 
+done
