@@ -36,5 +36,6 @@ adptvSampling.writeOPF_lessPop(l, T, myn_clusters, n_samples)
 
 # Based on information in output file, build the cpptraj input file, as you give it the topology name, it should be 
 # common for all trajectories
+
 topFile='mytopfile.top'
 adptvSampling.CpptrajInGen()
