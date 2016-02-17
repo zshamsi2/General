@@ -5,7 +5,7 @@ import mdtraj as md
 	
 msm='MSM10-500.pkl'
 cl='clustering.pkl'
-n_samples = 5000
+n_samples = 10
 Trjs = '../*.mdcrd'
 top = 'pNRTapo-strip.pdb'
 
@@ -13,8 +13,7 @@ cluster = pickle.load(open(cl,'rb'))
 clL = cluster.labels_
 msm = io.load(msm)
 
-trj = msm.sample_discrete(state = None, n_steps = n_samples)
-#selections = msm.draw_samples(clL, n_samples)
+selections = msm.draw_samples(clL, n_samples)
 
 T = []
 for trj in sorted(glob.glob(Trjs)):
