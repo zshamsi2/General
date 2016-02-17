@@ -28,7 +28,6 @@ T = []
 for trj in sorted(glob.glob(Trjs)):
 	T.append(trj)
 
-count = 0
 arg = [(msm,clL,synthTrj[count],count) for count in range(len(trj))]
 p = Pool(10)
 S = p.map(multi_run_wrapper, arg)
