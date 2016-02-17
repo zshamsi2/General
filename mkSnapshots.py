@@ -13,7 +13,7 @@ cluster = pickle.load(open(cl,'rb'))
 clL = cluster.labels_
 msm = io.load(msm)
 
-trj = msm.sample_discrete(state = None, n_steps = n_samples)
+synthTrj = msm.sample_discrete(state = None, n_steps = n_samples)
 #selections = msm.draw_samples(clL, n_samples)
 
 T = []
@@ -21,7 +21,7 @@ for trj in sorted(glob.glob(Trjs)):
 	T.append(trj)
 
 count = 0
-for frame in trj:
+for frame in synthTrj:
 	selections = msm.draw_samples(clL, 1)[frame]
 	
 	f = md.load(T[structure[0]], top=top, frame=structure[1])
