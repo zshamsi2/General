@@ -22,8 +22,9 @@ for trj in sorted(glob.glob(Trjs)):
 
 count = 0
 for frame in synthTrj:
-	selections = msm.draw_samples(clL, 1)[frame]
-	
+	structure = msm.draw_samples(clL, 1)[frame]
+	print count
+	print structure
 	f = md.load(T[structure[0]], top=top, frame=structure[1])
 	f.save_pdb(str(count)+'.pdb')
 	count = count+1	
