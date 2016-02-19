@@ -4,12 +4,21 @@ import pickle
 import glob 
 import mdtraj as md
 
+# MSM file in pickle format
 msm='MSM10-500.pkl'
+# Cluster file in pickle format
 cl='clustering.pkl'
+# Number of snapshots
 n_samples = 10000
+# Address of actual MD trajectories
 Trjs = '../*.mdcrd'
+# Comont topology name and address
 top = 'pNRTapo-strip.pdb'
+# Number of processors
+np = 10
 
+
+# Functions required for parallelization
 def multi_run_wrapper(args):
 	return f(*args)
 def f(msm,clL,frame,count):
@@ -28,8 +37,6 @@ T = []
 for trj in sorted(glob.glob(Trjs)):
 	T.append(trj)
 
-arg = [(msm,clL,synthTrj[count],count) for count in range(len(trj))]
-p = Pool(10)
+arg = [(msm,clL,synthTrj[count],count) for count in range(len(synthTrj))]
+p = Pool(np)
 S = p.map(multi_run_wrapper, arg)
-
-
