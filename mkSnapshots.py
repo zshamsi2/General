@@ -25,7 +25,7 @@ for frame in synthTrj:
 	structure = msm.draw_samples(clL, 1)[frame]
 	print count
 	print structure
-	f = md.load(T[structure[0]], top=top, frame=structure[1])
+	f = md.load(T[structure[0][0]], top=top, frame=structure[0][1])
 	f.save_pdb(str(count)+'.pdb')
 	count = count+1	
 
