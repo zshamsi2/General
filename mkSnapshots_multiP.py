@@ -12,7 +12,7 @@ cl='clustering.pkl'
 n_samples = 10000
 # Address of actual MD trajectories
 Trjs = '../*.mdcrd'
-# Comont topology name and address
+# Comon topology name and address
 top = 'pNRTapo-strip.pdb'
 # Number of processors
 np = 10
