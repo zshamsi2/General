@@ -22,7 +22,9 @@ np = 10
 def multi_run_wrapper(args):
 	return f(*args)
 def f(msm,clL,frame,count):
+	print count
 	structure = msm.draw_samples(clL, 1)[frame]
+	print structure
 	f = md.load(T[structure[0][0]], top=top, frame=structure[0][1])
 	f.save_pdb(str(count)+'.pdb')
 	print count 
