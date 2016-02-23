@@ -6,33 +6,37 @@ import adaptiveSamplingMSM as ad
 from msmbuilder.msm import MarkovStateModel
 import shutil 
 
+"""
 cl = 'clustering_2OIQ_db.pkl'
 n_samples = 50
-Trjs = 'MD*-strTrj/*.mdcrd' # unstriped trajs!
+Trjs = 'stripedTrj/MD*-strTrj/*.mdcrd' # unstriped trajs!
 top = '2OIQ_db.prmtop'
 name_round = 'md3'
 name_sys = '2OIQ_db_'
 method = 'leastPop'
+"""
+cl = 'clustering_2OIQ_bi.pkl'
+n_samples = 50
+Trjs = 'stripedTrj/MD*-strTrj/*.mdcrd' # unstriped trajs!
+#top = '2OIQ_db.prmtop'
+name_round = 'md3'
+name_sys = '2OIQ_bi_'
+method = 'leastPop'
+
+
 
 def findTop(trjN):
+	roundN = trjN.split('/')[1][0:3]
 	a = trjN.split('/')[-1]
-	b = a.split('_md')[0]
-	top = b + '.prmtop'
-	#top = a.split('.')[0] + '.prmtop'
-	return top
-	
-def findTop1(trjN):
-	a = trjN.split('/')[-1]
-	b = a.split('_md')[0]
-	top = b + '.prmtop'
-	roundN  = trjN.split('-strTrj')[0]
-	rawTop = '../rawTop/'+roundN+'rawTrj'+top
+	topN = a.split('_md')[0]
+	rawtop = 'rawTrj/'+roundN+'-rwTop/'+topN+'.prmtop'
 	return rawtop
 	
 def findRawtrj(trjN):
-	a = trjN.split('/')[-1]
-	roundN  = trjN.split('-strTrj')[0]
-	rawTrj = '../rawTrj/'+roundN+'rawTrj'
+	roundN = trjN.split('/')[1][0:3]
+	sysName = trjN.split('/')[-1]
+	rawTrj = 'rawTrj/'+roundN+'-rwTrj/'+sysName
+	return rawTrj
 	
 cluster = pickle.load(open(cl,'rb'))
 clL = cluster.labels_
@@ -52,7 +56,7 @@ count = 0
 for init in inits:
 	structure = msm.draw_samples(clL, 1)[init]
 	print structure
-	top = findTop1(T[structure[0][0]])
+	top = findTop(T[structure[0][0]])
 	rawTrj = findRawtrj(T[structure[0][0]])
 	print top
 	f = md.load(rawTrj, top=top, frame=structure[0][1])
