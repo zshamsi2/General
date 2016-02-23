@@ -39,6 +39,6 @@ T = []
 for trj in sorted(glob.glob(Trjs)):
 	T.append(trj)
 
-arg = [(msm,clL,synthTrj[count],count) for count in range(len(synthTrj))]
+arg = [(msm,clL,msm_mapping_[synthTrj[count]],count) for count in range(len(synthTrj))]
 p = Pool(np)
 S = p.map(multi_run_wrapper, arg)
