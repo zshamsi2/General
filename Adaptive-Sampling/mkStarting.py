@@ -6,11 +6,10 @@ import adaptiveSamplingMSM as ad
 from msmbuilder.msm import MarkovStateModel
 import shutil 
 
-"""
+
 cl = 'clustering_2OIQ_db.pkl'
 n_samples = 50
 Trjs = 'stripedTrj/MD*-strTrj/*.mdcrd' # unstriped trajs!
-top = '2OIQ_db.prmtop'
 name_round = 'md3'
 name_sys = '2OIQ_db_'
 method = 'leastPop'
@@ -22,7 +21,7 @@ Trjs = 'stripedTrj/MD*-strTrj/*.mdcrd' # unstriped trajs!
 name_round = 'md3'
 name_sys = '2OIQ_bi_'
 method = 'leastPop'
-
+"""
 
 
 def findTop(trjN):
