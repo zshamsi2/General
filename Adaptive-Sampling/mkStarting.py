@@ -58,9 +58,23 @@ for init in inits:
 	top = findTop(T[structure[0][0]])
 	rawTrj = findRawtrj(T[structure[0][0]])
 	print top
-	f = md.load(rawTrj, top=top, frame=structure[0][1])
-	f.save_pdb(name_sys+str(count)+'_'+name_round+'.pdb')
-	shutil.copy(top, name_sys+str(count)+'_'+name_round+'.prmtop')
-	f.save_mdcrd(name_sys+str(count)+'_'+name_round+'.mdcrd')
+	#f = md.load(rawTrj, top=top, frame=structure[0][1])
+	#f.save_pdb(name_sys+str(count)+'_'+name_round+'.pdb')
+	#shutil.copy(top, name_sys+str(count)+'_'+name_round+'.prmtop')
+	#f.save_mdcrd(name_sys+str(count)+'_'+name_round+'.mdcrd')
+	frame = structure[0][1]
+	newTop = name_sys+str(count)+'_'+name_round+'.prmtop'
+	newrst = name_sys+str(count)+'_'+name_round+'-00.rst'
+	
+	f = open('cppASample_'+str(count)+'.in', 'w')
+        f.write('parm ' + top + '\n')
+        f.write('trajin ' + rawTrj  + '\n')
+        f.write('parmbox alpha 90 beta 90 gamma 90\n')
+        f.write('trajout ' + newrst + ' restart onlyframes ' + str(frame) +'\n')
+        f.write('parmwrite out ' + newTop +'\n')
+        f.write('run \n')
+        f.write('quit')
+        f.close()
+	
 	count = count+1	
 	print count 
