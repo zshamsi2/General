@@ -5,7 +5,7 @@ import mdtraj as md
 
 msm='MSM10-500.pkl'
 cl='clustering.pkl'
-n_samples = 5000
+n_samples = 10000
 Trjs = '../*.mdcrd'
 top = 'pNRTapo-strip.pdb'
 
@@ -31,12 +31,10 @@ for frame in synthTrj:
 	f = open('cpp_'+str(count)+'.in', 'w')
 	f.write('parm ' + top + '\n')
 	f.write('trajin ' + trj  + '\n')
-  f.write('parmbox alpha 90 beta 90 gamma 90\n')
-  f.write('trajout ' + str(count) + '.pdb restart onlyframes ' + str(trjFrame) +'\n')
-  f.write('parmwrite out ' + newTop +'\n')
-  f.write('run \n')
-  f.write('quit')
-  
+  	f.write('parmbox alpha 90 beta 90 gamma 90\n')
+  	f.write('trajout ' + str(count) + '.rst restart onlyframes ' + str(trjFrame) +'\n')
+  	f.write('parmwrite out ' + str(count) +'.prmtop\n')
+  	f.write('run \n')
+  	f.write('quit')
 	count = count+1	
-
 	print count 
