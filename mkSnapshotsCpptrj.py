@@ -21,7 +21,7 @@ for trj in sorted(glob.glob(Trjs)):
 
 count = 0
 for frame in synthTrj:
-	structure = msm.draw_samples(clL, 1)[msm_mapping_[frame]]
+	structure = msm.draw_samples(clL, 1)[msm.mapping_[frame]]
 	print count
 	print structure
 	trjFrame = structure[0][1]
