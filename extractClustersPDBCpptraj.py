@@ -28,7 +28,7 @@ for i in range(len(selections)):
 		trj = T[structure[0]]
         	#f = md.load(T[structure[0]], top=top, frame=structure[1])
         	#f.save_pdb(filename)
-		f = open('cpp_'+str(count)+'.in', 'w')
+		f = open('cpp_'+filename+'.in', 'w')
 		f.write('parm ' + top + '\n')
 		f.write('trajin ' + trj  + '\n')
   		f.write('parmbox alpha 90 beta 90 gamma 90\n')
@@ -36,6 +36,6 @@ for i in range(len(selections)):
   		f.write('parmwrite out ' + filename +'.prmtop\n')
   		f.write('run \n')
   		f.write('quit')
-        	
+        	f.close()
         	count = count+1
         	print(str(count)+' saved!')
