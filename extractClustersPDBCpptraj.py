@@ -5,7 +5,7 @@ import mdtraj as md
 	
 msm='MSM10-500.pkl'
 cl='clustering.pkl'
-n_samples = 10
+n_samples = 1 # numebr of samples for each cluster
 Trjs = '../*.mdcrd'
 top = 'pNRTapo-strip.pdb'
 
@@ -23,10 +23,19 @@ for i in range(len(selections)):
 	count = 0
 	selection = selections[i]
 	for structure in selection:
-		filename = 'cluster'+str(i)+'_'+str(count)+'.pdb'
-		      frameF=structure[1]
-		      str = T[structure[0]]
+		filename = 'cluster'+str(i)+'_'+str(count)
+		trjFrame=structure[1]
+		trj = T[structure[0]]
         	#f = md.load(T[structure[0]], top=top, frame=structure[1])
         	#f.save_pdb(filename)
+		f = open('cpp_'+str(count)+'.in', 'w')
+		f.write('parm ' + top + '\n')
+		f.write('trajin ' + trj  + '\n')
+  		f.write('parmbox alpha 90 beta 90 gamma 90\n')
+  		f.write('trajout ' + filename + '.rst restart onlyframes ' + str(trjFrame) +'\n')
+  		f.write('parmwrite out ' + filename +'.prmtop\n')
+  		f.write('run \n')
+  		f.write('quit')
+        	
         	count = count+1
-        	print(str(count)+' pdb saved!')
+        	print(str(count)+' saved!')
