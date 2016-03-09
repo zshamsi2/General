@@ -4,6 +4,9 @@ import glob
 from msmbuilder.utils import io
 import pickle
 
+
+# Concatinate features before analysis
+
 name_sys =  'ANC_S1'
 dataset = []
 inf = {}
