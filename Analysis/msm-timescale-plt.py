@@ -26,6 +26,13 @@ for i in lag_times:
     index=index+1
     io.dump(msm,'MSM'+str(i)+'.pkl')
 
+"""
+for i in lag_times:
+    msm = io.load('MSM'+str(i)+'.pkl')
+    ts[:,index]=msm.timescales_
+    index=index+1
+"""
+
 fig, ax = plt.subplots(1,1)
 
 for i in range(10):
@@ -39,7 +46,8 @@ for i in range(10):
   elif j>3:
     k='th'
   l=str(j)+k
-  ax.plot(ns_lt[0:l],stepS*ts[i,0:l],label="%s timescale" %l)
+  ax.plot(ns_lt[0:-1],stepS*ts[i,0:-1],label="%s timescale" %l)
+  #ax.plot(ns_lt[0:-1],stepS*ts[i,0:-1],'o',label="%s timescale" %l)
 
 fig.set_figheight(4)
 fig.set_figwidth(5.5)
