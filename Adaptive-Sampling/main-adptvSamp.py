@@ -6,9 +6,16 @@ import pickle
 import glob
 import msmbuilder.cluster
 from msmbuilder.utils import io
-myn_clusters = 200
 
-n_samples = 50
+### Step 1: featurizing based on one of the metrics
+
+### Step 2: 
+
+
+
+
+myn_clusters = 200
+n_samples = 100
 
 ### Step 3.a: Clustering based on raw features
 # Useful when you have few number of features
@@ -47,21 +54,27 @@ io.dump(states,'clustering.pkl')
 # findStarting(trjs, N, method='random')
 
 import adaptivsamplingMSM as ad
+from msmbuilder.msm import MarkovStateModel
+
 cluster=pickle.load(open('clustering.pkl','rb'))
 trjs = cluster.labels_
 N = n_samples
 T = []
 for trj in sorted(glob.glob('rawTrj/MD1-rwTrj/*.mdcrd')):
 	T.append(trj)
-inits = ad.findStarting(trjs, N, method='leastcount')
+inits = ad.findStarting([trjs], N, method='leastPop')
 msm=MarkovStateModel(lag_time=1, n_timescales=10)
-msm.fit_transform(cl.labels_)
+msm.fit_transform(cluster.labels_)
 OPF = []
+structure = msm.draw_samples(trjs, 1)
 for i in range(n_samples):
-	init = msm.draw_samples(inits[i], 1)
+	try:
+		init = structure[msm.mapping_[inits[i]]]
+	except KeyError:
+		print KeyError
 	traj = T[init[0][0]]
-	fram = init[0][1]
-	OPF.append({'traj':T[trj], 'frame':frm})
+	frame = init[0][1]
+	OPF.append({'traj':traj, 'frame':frame})
 json.dump(OPF, open("ClsInf.txt",'w'))
 
 ### Step 5: making the CPPtraj inputs
