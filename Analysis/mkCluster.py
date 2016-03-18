@@ -4,7 +4,44 @@ import glob
 from msmbuilder.utils import io
 import pickle
 
+# Concatinate features before analysis with mapping
+import glob
+import numpy as np
 
+mapping = {}
+for i in range(0,100):
+  flagFirstTime = True
+  name = 'A1_Sampler4_'+str(i)+'_Md4-ftrz.npy'
+
+  ftrFrame = 0
+  for file in sorted(glob.glob('phi_psi_chi1/A1_Sampler4_'+str(i)+'_Md4*')):
+    print file
+    if flagFirstTime:
+      z = np.load(file)
+
+      insideMap = {}
+      for trjFrame in range(len(z)):
+        insideMap[ftrFrame]=['file',trjFrame]
+        ftrFrame = ftrFrame+1
+
+      flagFirstTime = False
+    else:
+      trjFtr = np.load(file)
+      z = np.append(trjFtr,z, axis=0)
+
+      for trjFrame in range(len(trjFtr)):
+        insideMap[ftrFrame]=['file',trjFrame]
+        ftrFrame = ftrFrame+1
+
+  print z.shape
+  np.save(name,z)
+  mapping[name]= insideMap
+  
+with open('maping_'+name_sys+'.txt', 'wb') as handle:
+  pickle.dump(mapping, handle)  
+  
+  
+  
 # Concatinate features before analysis
 import glob
 import numpy as np
