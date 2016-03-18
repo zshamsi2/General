@@ -2,7 +2,7 @@ from msmbuilder.dataset import dataset
 import numpy as np
 from msmbuilder.cluster import KMeans
 import pickle
-import adptvSampling
+#import adptvSampling
 import glob
 import msmbuilder.cluster
 from msmbuilder.utils import io
