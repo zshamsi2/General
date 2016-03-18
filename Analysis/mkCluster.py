@@ -6,7 +6,23 @@ import pickle
 
 
 # Concatinate features before analysis
+import glob
+import numpy as np
 
+for i in range(0,100):
+  flagFirstTime = True
+  name = 'A1_Sampler4_'+str(i)+'_Md4'
+  for file in sorted(glob.glob('phi_psi_chi1/A1_Sampler4_'+str(i)+'_Md4*')):
+    print file
+    if flagFirstTime:
+      z = np.load(file)
+      flagFirstTime = False
+    else:
+      z = np.append(np.load(file),z, axis=0)
+  print z.shape
+  np.save(name,z)
+  
+  
 name_sys =  'ANC_S1'
 dataset = []
 inf = {}
@@ -14,12 +30,8 @@ for i in sorted(glob.glob('phi_psi_chi1/*.npy')):
   # making msm from raw rmsd features
   # preparing data format
   a = np.load(i)
-  #b = [[j] for j in a]
-  b = a
-  c = np.array(b)
-  #d = c[0:-1:40]
-  d = c
-  dataset.append(d)
+  b = np.array(a)
+  dataset.append(b)
   inf[i] = len(dataset)
   print(len(dataset))
   print i
