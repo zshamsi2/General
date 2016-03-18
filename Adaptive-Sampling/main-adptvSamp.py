@@ -6,12 +6,13 @@ import adptvSampling
 import glob
 import msmbuilder.cluster
 from msmbuilder.utils import io
-
-### Step 3: Clustering
 myn_clusters = 200
-n_samples = 50
-dataset = []
 
+n_samples = 50
+
+### Step 3.a: Clustering based on raw features
+# Useful when you have few number of features
+dataset = []
 inf = open('readme','w')
 for i in sorted(glob.glob('2OIQ-ftrz/*.npy')):
   a = np.load(i)
@@ -21,8 +22,27 @@ states = msmbuilder.cluster.KMeans(n_clusters=myn_clusters)
 states.fit(dataset)
 io.dump(states,'clustering.pkl')
 
+### Step 3.b: Clustering based on tICs
+# Useful when you have enormous numbers of features
+dataset = []
+for i in sorted(glob.glob('phi_psi_chi1/*.npy')):
+  a = np.array(np.load(i))
+  dataset.append(a)
+  print i
+
+# Define tICs
+from msmbuilder.decomposition import tICA
+tica = tICA(n_components=10, lag_time=1)
+tica.fit(dataset)
+tica_traj = tica.transform(dataset)
+np.save('tica_traj', tica_traj)
+# Cluster tICs  
+states = msmbuilder.cluster.KMeans(n_clusters=1000)
+states.fit(tica_traj)
+io.dump(states,'clustering.pkl')
 
 ### Step 4: finding starting points 
+
 # the address should be the address of trajectories corresponding to dataset
 # findStarting(trjs, N, method='random')
 
