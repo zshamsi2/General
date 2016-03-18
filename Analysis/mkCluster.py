@@ -5,9 +5,12 @@ from msmbuilder.utils import io
 import pickle
 
 # Concatinate features before analysis with mapping
+# Works GREAT!!! :) 
+
 import glob
 import numpy as np
-
+import pickle
+name_sys =  'ANC_A2'
 mapping = {}
 for i in range(0,100):
   flagFirstTime = True
@@ -21,7 +24,7 @@ for i in range(0,100):
 
       insideMap = {}
       for trjFrame in range(len(z)):
-        insideMap[ftrFrame]=['file',trjFrame]
+        insideMap[ftrFrame]=[file,trjFrame]
         ftrFrame = ftrFrame+1
 
       flagFirstTime = False
@@ -30,7 +33,7 @@ for i in range(0,100):
       z = np.append(trjFtr,z, axis=0)
 
       for trjFrame in range(len(trjFtr)):
-        insideMap[ftrFrame]=['file',trjFrame]
+        insideMap[ftrFrame]=[file,trjFrame]
         ftrFrame = ftrFrame+1
 
   print z.shape
@@ -39,7 +42,10 @@ for i in range(0,100):
   
 with open('maping_'+name_sys+'.txt', 'wb') as handle:
   pickle.dump(mapping, handle)  
-  
+"""
+with open('file.txt', 'rb') as handle:
+  b = pickle.loads(handle.read())
+"""
   
   
 # Concatinate features before analysis
