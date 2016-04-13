@@ -3,11 +3,11 @@ import pickle
 import glob 
 import mdtraj as md
 	
-msm='MSM10-500.pkl'
+msm='MSM.pkl'
 cl='clustering.pkl'
-n_samples = 10
-Trjs = '../*.mdcrd'
-top = 'pNRTapo-strip.pdb'
+n_samples = 5
+Trjs = 'ww_1*.xtc'
+top = 'ww_ext.pdb'
 
 cluster = pickle.load(open(cl,'rb'))
 clL = cluster.labels_
@@ -24,6 +24,8 @@ for i in range(len(selections)):
 	selection = selections[i]
 	for structure in selection:
 		filename = 'cluster'+str(i)+'_'+str(count)+'.pdb'
+		print(T[structure[0]])
+		print(structure[1])
         	f = md.load(T[structure[0]], top=top, frame=structure[1])
         	f.save_pdb(filename)
         	count = count+1
