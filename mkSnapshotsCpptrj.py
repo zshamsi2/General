@@ -5,9 +5,9 @@ import mdtraj as md
 
 msm='MSM10-500.pkl'
 cl='clustering.pkl'
-n_samples = 10000
-Trjs = '../*.mdcrd'
-top = 'pNRTapo-strip.pdb'
+n_samples = 50
+Trjs = '*.xtc'
+top = 'ww_ext.pdb'
 
 cluster = pickle.load(open(cl,'rb'))
 clL = cluster.labels_
