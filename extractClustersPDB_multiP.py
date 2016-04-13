@@ -4,11 +4,11 @@ import pickle
 import glob 
 import mdtraj as md
 
-msm='MSM10-500.pkl'
+msm='MSM.pkl'
 cl='clustering.pkl'
 n_samples = 10
-Trjs = '../*.mdcrd'
-top = 'pNRTapo-strip.pdb'
+Trjs = '*.xtc'
+top = 'ww_ext.pdb'
 
 def multi_run_wrapper(args):
 	return f(*args)
@@ -16,7 +16,6 @@ def multi_run_wrapper(args):
 def f(selection,T,top,i):
 	import mdtraj as md
 	count = 0
-	#selection = selections[i]
 	for structure in selection:
 		filename = 'cluster'+str(i)+'_'+str(count)+'.pdb'
         	f = md.load(T[structure[0]], top=top, frame=structure[1])
