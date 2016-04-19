@@ -43,7 +43,7 @@ addions complex Na+
 addions complex Cl-
 addions complex Na+ $N
 addions complex Cl- $N
-saveamberparm complex ${line}.top ${line}.crd
+saveamberparm complex ${line}.prmtop ${line}.crd
 savepdb complex ${line}_SetUp.pdb
 quit
 EOF
