@@ -6,7 +6,7 @@
 import os.path
 import glob
 
-for mdF in glob.glob('rawMdcrd/*.mdcrd'):
+for mdF in glob.glob('MD3-rwTrj/*.mdcrd'):
 	l = mdF.split('/')[-1]
 	topN = l.split('_md')[0]
 	# topN = l.split('MD')[0]
@@ -14,7 +14,7 @@ for mdF in glob.glob('rawMdcrd/*.mdcrd'):
 	print topN, mdN
 
 	inF = open("cppIn"+ mdN +".in" , 'w')
-	inF.write("parm top/" + topN + ".top \n")
+	inF.write("parm MD3-rwTop/" + topN + ".prmtop \n")
         inF.write("trajin " + mdF + "\n")
 	
 	inF.write("strip :WAT \n")
