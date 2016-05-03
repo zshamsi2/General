@@ -33,9 +33,10 @@ for mdF in glob.glob('MD3-rwTrj/*.mdcrd'):
 # for i in `ls cppIn_*`; do cpptraj < $i; done
 # for the next step you need to have the striped topology files:
 # as an example of ccptraj
-# parm mol.water.parm7
-# parmstrip :WAT
+parm mol.water.parm7
+parmstrip :WAT
 ###parmbox nobox 
-#parmwrite out strip.mol.nobox.parm7
+parmwrite out strip.mol.nobox.parm7
 ##################################################################################
 # msmb AtomPairsFeaturizer --out pair_features --pair_indices AtomIndices.txt --top ala2.pdb --trjs "*.dcd"
+
