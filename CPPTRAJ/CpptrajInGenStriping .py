@@ -30,7 +30,7 @@ for mdF in glob.glob('MD3-rwTrj/*.mdcrd'):
 	
 ##################################################################################
 # run generated input files with the simple command:
-# for i in `ls cppIn_*`; do cpptraj < $i; done
+for i in `ls cppIn*`; do cpptraj < $i; done
 # for the next step you need to have the striped topology files:
 # as an example of ccptraj
 parm mol.water.parm7
