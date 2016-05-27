@@ -24,7 +24,7 @@ for i in range(len(selections)):
 	selection = selections[i]
 	for structure in selection:
 		filename = 'cluster'+str(i)+'_'+str(count)
-		trjFrame=structure[1]
+		trjFrame=structure[1]+1
 		trj = T[structure[0]]
         	#f = md.load(T[structure[0]], top=top, frame=structure[1])
         	#f.save_pdb(filename)
