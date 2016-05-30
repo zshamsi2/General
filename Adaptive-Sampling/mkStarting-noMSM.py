@@ -6,7 +6,6 @@ def findElementPosition(l, desCluster):
             n_frames = l[i]
             for j in range(len(n_frames)):
                 if l[i][j] == desCluster:
-                        #print i, j
                         output = [i, j]
                         flag = True
                         break
@@ -24,7 +23,6 @@ def populationFind(l, myn_clusters):
                     c = l[i]
                     c2 = c.tolist()
                     sum = sum + c2.count(clusterID)
-                #print sum
             pop.append([sum, clusterID])
     pop.sort()
     return pop
