@@ -8,7 +8,6 @@ cl='clustering.pkl'
 n_samples = 5
 Trjs = 'ww_1*.xtc'
 top = 'ww_ext.pdb'
-
 cluster = pickle.load(open(cl,'rb'))
 clL = cluster.labels_
 msm = io.load(msm)
