@@ -1,10 +1,10 @@
 # General codes 
-## MD Preparation
+### MD Preparation
 
-## General simulation analysis
+### General simulation analysis
 
-## Adaptive sampling
+### Adaptive sampling
 
-## Codes for CPPTRAJ 
+### Codes for CPPTRAJ 
 
-## Codes for VMD
+### Codes for VMD
