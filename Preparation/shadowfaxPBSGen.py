@@ -1,3 +1,5 @@
+# Submit multiple Jobs to the cluster with specified Nodes.
+
 ##########################################################################################
 def chFormat(nodesInf):
 	count=0
