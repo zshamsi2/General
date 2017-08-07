@@ -1,3 +1,6 @@
+#################
+# Extract a frame from each cluster using multiple processor
+
 from msmbuilder.utils import io 
 from multiprocessing import Pool
 import pickle
