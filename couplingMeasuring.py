@@ -1,7 +1,11 @@
+######################
+# Plot the distance between evolutionary couple residues in available crystal structures
+
 import numpy as np
 import mdtraj as md
 from matplotlib import pyplot as plt
-#coupling Information
+
+# coupling Information
 ci = np.loadtxt('ADRB2_HUMAN_ECScores.csv', delimiter = ',')
 
 maxP = ci[0][2]
@@ -49,9 +53,11 @@ x = [eps[i][2] for i in range(len(eps))]
 plt.scatter(x , np.absolute(deltaDist))
 plt.savefig('fig1.png')
 plt.show()
+
 ####################################################################################################################
-# calculating dihedrals
+# Calculating dihedral angles
 ####################################################################################################################
+
 top1 = md.load('3SN6-R.pdb').topology
 top2 = md.load('2RH1.pdb').topology
 
