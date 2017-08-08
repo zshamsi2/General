@@ -1,3 +1,4 @@
+
 import numpy as np
 f = open('B2AR-align-Identity.fasta')
 lines = f.read().split('>')
@@ -7,7 +8,7 @@ np.savetxt('test-frag.txt', frag, delimiter=" ", fmt="%s")
 np.savetxt('test-unfrag.txt', unfrag, delimiter=" ", fmt="%s") 
 
 import numpy as np
-f=open('str')
+f = open('str')
 lines = f.read().split('\n')
 frag = ['A1'+line for line in lines]
 np.savetxt('strList', frag, delimiter=" ", fmt="%s") 
