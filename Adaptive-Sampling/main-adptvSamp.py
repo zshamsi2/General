@@ -10,10 +10,6 @@ from msmbuilder.utils import io
 ### Step 1: featurizing based on one of the metrics
 
 ### Step 2: 
-
-
-
-
 myn_clusters = 200
 n_samples = 100
 
